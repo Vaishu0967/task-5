@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Basic Calculator</title>
+</head>
+<body>
+<div class="calculator">
+  <input type="text" id="screen" class="calculator-screen" disabled>
+  <br>
+  <button class="button" onclick="appendNumber('1')">1</button>
+  <button class="button" onclick="appendNumber('2')">2</button>
+  <button class="button" onclick="appendNumber('3')">3</button>
+  <button class="button" onclick="setOperation('+')">+</button>
+  <br>
+  <button class="button" onclick="appendNumber('4')">4</button>
+  <button class="button" onclick="appendNumber('5')">5</button>
+  <button class="button" onclick="appendNumber('6')">6</button>
+  <button class="button" onclick="setOperation('-')">-</button>
+  <br>
+  <button class="button" onclick="appendNumber('7')">7</button>
+  <button class="button" onclick="appendNumber('8')">8</button>
+  <button class="button" onclick="appendNumber('9')">9</button>
+  <button class="button" onclick="setOperation('*')">*</button>
+  <br>
+  <button class="button" onclick="appendNumber('0')">0</button>
+  <button class="button" onclick="calculate()">=</button>
+  <button class="button" onclick="setOperation('/')">/</button>
+  <button class="button" onclick="clearScreen()">C</button>
+</div>
+<script>
+let currentOperation = '';
+let currentNumber = '';
+let storedNumber = '';
+
+function appendNumber(number) {
+  currentNumber += number;
+  document.getElementById('screen').value = currentNumber;
+}
+function setOperation(operation) {
+  storedNumber = currentNumber;
+  currentNumber = '';
+  currentOperation = operation;
+}
+function calculate() {
+  let result;
+  switch(currentOperation) {
+    case '+':
+      result = parseFloat(storedNumber) + parseFloat(currentNumber);
+      break;
+    case '-':
+      result = parseFloat(storedNumber) - parseFloat(currentNumber);
+      break;
+    case '*':
+      result = parseFloat(storedNumber) * parseFloat(currentNumber);
+      break;
+    case '/':
+      result = parseFloat(storedNumber) / parseFloat(currentNumber);
+      break;
+    default:
+      result = 'Error';
+  }
+  document.getElementById('screen').value = result;
+  currentNumber = result;
+  storedNumber = '';
+}
+
+function clearScreen() {
+  currentNumber = '';
+  storedNumber = '';
+  currentOperation = '';
+  document.getElementById('screen').value = '';
+}
+</script>
+</body>
+</html>
